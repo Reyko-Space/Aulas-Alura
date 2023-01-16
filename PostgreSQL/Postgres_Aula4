@@ -1,0 +1,72 @@
+-- Aula 4 --
+-- https://www.postgresql.org/docs/14/ddl-constraints.html
+
+-- Primary key
+CREATE TABLE curso (
+    id INT PRIMARY KEY, -- NOT NULL UNIQUE
+    nome VARCHAR(255) NOT NULL
+);
+
+INSERT INTO curso (id, nome) VALUES (NULL, NULL) -- ele nao permite mais a adicao de valores nulos 
+
+
+CREATE TABLE curso (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
+);
+
+INSERT INTO curso (id, nome) VALUES (1, 'HTML');
+INSERT INTO curso (id, nome) VALUES (2, 'Python');
+
+-- Foreign key (bloqueia acesso de uma nova chave que nao existe nas tabelas de referencia)
+DROP TABLE aluno;
+
+CREATE TABLE aluno (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
+);
+
+INSERT INTO aluno (nome) VALUES ('Suga')
+INSERT INTO aluno (nome) VALUES ('RM')
+
+CREATE TABLE aluno_curso (
+    aluno_id INTEGER,
+    curso_id INTEGER,
+    PRIMARY KEY (aluno_id, curso_id),
+    FOREIGN KEY (aluno_id) REFERENCES aluno (id),
+    FOREIGN KEY (curso_id) REFERENCES curso (id)
+);
+
+INSERT INTO aluno_curso (aluno_id, curso_id) VALUES (1, 1);
+INSERT INTO aluno_curso (aluno_id, curso_id) VALUES (2, 1);
+
+-- Join
+SELECT aluno.nome AS aluno_nome, curso.nome AS curso 
+    FROM aluno 
+    JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+    JOIN curso ON curso.id = aluno_curso.curso_id;
+
+INSERT INTO aluno_curso (aluno_id, curso_id) VALUES (2, 2);
+
+-- LEFT JOIN
+SELECT aluno.nome AS "Nome do aluno", curso.nome AS "Nome do curso" 
+    FROM aluno 
+    LEFT JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+    LEFT JOIN curso ON curso.id = aluno_curso.curso_id;
+
+-- RIGHT JOIN
+SELECT aluno.nome AS "Nome do aluno", curso.nome AS "Nome do curso" 
+    FROM aluno 
+    RIGHT JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+    RIGHT JOIN curso ON curso.id = aluno_curso.curso_id;
+
+-- FULL JOIN
+SELECT aluno.nome AS "Nome do aluno", curso.nome AS "Nome do curso" 
+    FROM aluno 
+    FULL JOIN aluno_curso ON aluno_curso.aluno_id = aluno.id
+    FULL JOIN curso ON curso.id = aluno_curso.curso_id;
+
+-- CROSS JOIN 
+SELECT aluno.nome as "Nome do aluno", curso.nome as "Nome do curso"
+FROM aluno
+CROSS JOIN curso;

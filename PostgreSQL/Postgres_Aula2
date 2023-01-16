@@ -1,0 +1,45 @@
+-- Aula 2 --
+
+-- Inserir dados na tabela
+INSERT INTO aluno (
+    nome,
+    cpf,
+    observacao,
+    idade,
+    dinheiro,
+    altura,
+    ativo,
+    data_nascimento,
+    hora_aula,
+    matricula
+    ) 
+VALUES (
+    'Anna',
+    '12345678900',
+    'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    20,
+    100.50, -- ponto separa casas
+    1.81,
+    True, -- True, False ou NULL
+    '1985-08-26', -- YYYY-MM-DD
+    '17:30:00', -- HH24:MI:SS
+    '2022-04-13 10:14:52' -- YYYY-MM-DD HH24:MI:SS
+    );
+
+-- Update de dados ja existentes
+UPDATE aluno 
+SET nome = 'Joan',
+    cpf = '98745632100',
+    observacao = 'Get started by creating a new file or uploading an existing file.',
+    idade = 23,
+    dinheiro = 15.23,
+    altura = 1.90,
+    ativo = False,
+    data_nascimento = '1985-08-26',
+    hora_aula = '17:30:00',
+    matricula = '2022-04-13 10:14:52'
+WHERE id = 1;
+
+-- Deletar dados na tabela
+DELETE FROM aluno
+WHERE nome = 'Joan'

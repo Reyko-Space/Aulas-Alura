@@ -1,0 +1,22 @@
+-- Aula 1 --
+-- https://www.postgresql.org/docs/current/datatype.html
+
+DROP DATABASE alura; -- apaga banco de dados
+
+CREATE DATABASE alura; -- cria banco de dados
+
+CREATE TABLE aluno (
+    id SERIAL,
+    nome VARCHAR(255),
+    cpf CHAR(11),
+    observacao TEXT;
+    idade INTEGER,
+    dinheiro NUMERIC(10,2), -- 10 caracteres + 2 casas decimais
+    altura REAL,
+    ativo BOOLEAN,
+    data_nascimento DATE,
+    hora_aula TIME,
+    matricula TIMESTAMP
+);
+
+SELECT * FROM aluno;

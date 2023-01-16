@@ -1,0 +1,72 @@
+-- Aula 3 --
+
+-- Select para campos expecificos 
+SELECT nome AS "Nome do aluno",
+    idade,
+    matricula as data_de_matricula
+FROM aluno;
+
+-- Filtros
+INSERT INTO aluno (nome) VALUES ('Cami');
+INSERT INTO aluno (nome) VALUES ('RM');
+INSERT INTO aluno (nome) VALUES ('August D');
+INSERT INTO aluno (nome) VALUES ('Suga Min');
+INSERT INTO aluno (nome) VALUES ('Yoongi Min');
+INSERT INTO aluno (nome) VALUES ('JK');
+INSERT INTO aluno (nome) VALUES ('Jimin');
+
+-- com string
+SELECT * FROM aluno
+WHERE nome = 'August D'; -- pesquisa expecifica
+
+SELECT * FROM aluno
+WHERE nome <> 'August D'; -- tudo diferente do escrito (!= ou <>)
+
+SELECT * FROM aluno
+WHERE nome LIKE '_in'; -- pesquisa tudo que termina com 'in'
+
+SELECT * FROM aluno
+WHERE nome NOT LIKE '_in'; -- pesquisa tudo que nao termina com 'in'
+
+SELECT * FROM aluno
+WHERE nome LIKE 'J%'; -- pesquisa tudo que comeca com 'J'
+
+SELECT * FROM aluno
+WHERE nome LIKE '%Min'; -- pesquisa tudo que termina com 'Min'
+
+SELECT * FROM aluno
+WHERE nome LIKE '% %'; -- pesquisa tudo que tem espaco no meio
+
+-- com valores NULL
+SELECT * FROM aluno 
+WHERE cpf IS NULL
+
+SELECT * FROM aluno 
+WHERE cpf IS NOT NULL
+
+-- com INT
+SELECT * FROM aluno 
+WHERE idade <> 35
+
+SELECT * FROM aluno 
+WHERE idade < 35
+
+SELECT * FROM aluno 
+WHERE idade BETWEEN 10 AND 35
+
+-- com BOOLEAN
+SELECT * FROM aluno 
+WHERE ativo = True -- ou False
+
+SELECT * FROM aluno 
+WHERE ativo IS NULL
+
+-- com AND 
+SELECT * FROM aluno 
+WHERE nome LIKE '%Min'
+AND cpf IS NOT NULL;
+
+-- com OR 
+SELECT * FROM aluno 
+WHERE nome LIKE '%Min'
+OR nome LIKE 'Suga%';
